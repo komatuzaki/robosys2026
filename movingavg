@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 小松崎海音
+# SPDX-License-Identifier: BSD-3-Clause
+
+import sys
+from collections import deque
+
+window_size = 3
+if len(sys.argv) >= 2:
+    window_size = int(sys.argv[1])
+
+window = deque(maxlen=window_size)
+
+for line in sys.stdin:
+    val = float(line.strip())
+    window.append(val)
+    avg = sum(window) / len(window)
+    print(f"{avg:.2f}")
