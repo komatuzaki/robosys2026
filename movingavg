@@ -1,18 +1,47 @@
 #!/usr/bin/env python3
-# SPDX-FileCopyrightText: 2026 小松崎海音
+# SPDX-FileCopyrightText: 2026 <小松崎海音>
 # SPDX-License-Identifier: BSD-3-Clause
 
 import sys
 from collections import deque
 
-window_size = 3
-if len(sys.argv) >= 2:
-    window_size = int(sys.argv[1])
 
-window = deque(maxlen=window_size)
+def error_exit(msg):
+    print(f"Error: {msg}", file=sys.stderr)
+    sys.exit(1)
 
-for line in sys.stdin:
-    val = float(line.strip())
-    window.append(val)
-    avg = sum(window) / len(window)
-    print(f"{avg:.2f}")
+
+def main():
+    window_size = 3
+    if len(sys.argv) == 2:
+        try:
+            window_size = int(sys.argv[1])
+        except ValueError:
+            error_exit("Window size must be an integer.")
+        if window_size <= 0:
+            error_exit("Window size must be greater than 0.")
+    elif len(sys.argv) > 2:
+        error_exit("Too many arguments.")
+
+    window = deque(maxlen=window_size)
+    has_data = False
+
+    for line in sys.stdin:
+        stripped = line.strip()
+        if not stripped:
+            continue
+        try:
+            val = float(stripped)
+        except ValueError:
+            error_exit(f"Invalid number: '{stripped}'")
+        window.append(val)
+        avg = sum(window) / len(window)
+        print(f"{avg:.2f}")
+        has_data = True
+
+    if not has_data:
+        error_exit("No numeric input provided.")
+
+
+if __name__ == "__main__":
+    main()

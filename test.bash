@@ -21,5 +21,24 @@ out=$(printf "10\n20\n30\n40\n" | ./movingavg 2)
 expected=$'10.00\n15.00\n25.00\n35.00'
 [ "${out}" = "${expected}" ] || ng "$LINENO"
 
+### STRANGE INPUT (NON-NUMERIC) ###
+out=$(echo "abc" | ./movingavg 2>/dev/null)
+[ "$?" = 1 ] || ng "$LINENO"
+[ "${out}" = "" ] || ng "$LINENO"
+
+### STRANGE INPUT (EMPTY) ###
+out=$(printf "" | ./movingavg 2>/dev/null)
+[ "$?" = 1 ] || ng "$LINENO"
+[ "${out}" = "" ] || ng "$LINENO"
+
+### STRANGE INPUT (INVALID WINDOW SIZE) ###
+out=$(printf "10\n20\n" | ./movingavg 0 2>/dev/null)
+[ "$?" = 1 ] || ng "$LINENO"
+[ "${out}" = "" ] || ng "$LINENO"
+
+out=$(printf "10\n20\n" | ./movingavg abc 2>/dev/null)
+[ "$?" = 1 ] || ng "$LINENO"
+[ "${out}" = "" ] || ng "$LINENO"
+
 [ "${res}" = 0 ] && echo "OK"
 exit $res
