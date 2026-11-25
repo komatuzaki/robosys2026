@@ -1,5 +1,5 @@
 #!/bin/bash
-# SPDX-FileCopyrightText: 2026 <小松崎海音>
+# SPDX-FileCopyrightText: 2026 Kaito Komatsuzaki
 # SPDX-License-Identifier: BSD-3-Clause
 
 ng () {
