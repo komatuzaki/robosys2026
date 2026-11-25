@@ -1,8 +1,9 @@
-# movingavg
+## 動作環境
 
-![test](https://github.com/komatuzaki/robosys2026/actions/workflows/test.yml/badge.svg)
+* Ubuntu 24.04 (GitHub Actions: ubuntu-latest)
+* Python 3
 
-```bash
-git clone [https://github.com/komatuzaki/robosys2026.git](https://github.com/komatuzaki/robosys2026.git)
-cd robosys2026
-chmod +x movingavg
+## ライセンス
+
+* このソフトウェアパッケージは，3条項BSDライセンスの下，再頒布および使用が許可されます．
+* © 2026 Kaito Komatsuzaki
